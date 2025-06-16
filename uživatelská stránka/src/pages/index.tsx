@@ -1,108 +1,104 @@
-import Navbar from "./componenty/navbar"
-import Footer from "./componenty/footer"
-import Image from "next/image"
-import { api } from "~/utils/api";
+import Link from "next/link";
+import { NextPage } from "next";
 
-import { useState, useEffect } from "react";
-
-
-export default function Home() {
-  const [imgPath, setImgPath] = useState<string>("/uploads/banner.png");
-    const { data: texts, isLoading } = api.texts.getTexts.useQuery();
-  const { data: blogs, } = api.blog.getPublished.useQuery();
+import NavBar from './componenty/navbar'
+import { Card } from "./componenty/card";
+import AdvantageItem from "./componenty/advantageItem";
+import TemplateCard  from "./componenty/tamplates";
+import { useSession } from "next-auth/react";
+import Footer from "./componenty/header";
 
 
 
+const Home: NextPage = () => {
 
-
-
-  useEffect(() => {
-    fetch("/api/upload")
-      .then(res => res.json())
-      .then((data: { path?: string }) => {
-        if (typeof data.path === "string") setImgPath(data.path);
-      })
-      .catch((error) => {
-        console.error("Failed to fetch banner path:", error);
-      });
-  }, []);
-
-    if (isLoading) return <p>Načítání...</p>;
-    if (!texts) return <p>Nenačteny žádné texty.</p>;
-
-    const getText = (key: string) => {
-    return texts.find((t) => t.key === key)?.value ?? "";
-    };
-
-    
-
-    const getColor = (key: string): string => {
-      const found = texts.find((t) => t.key === key) as { settings?: { color?: string } } | undefined;
-      const settings = found?.settings;
-      return settings?.color ?? "#000000";
-    };
-
-    const getSize = (key: string): string => {
-      const found = texts.find((t) => t.key === key) as { settings?: { fontSize?: string } } | undefined;
-      const settings = found?.settings;
-      return settings?.fontSize ?? "text-base"; 
-    };
-
-
+  const {data: session, status} = useSession();
 
   return (
-    <main className="min-h-screen flex flex-col">
-      <Navbar />
-      <div className="relative h-[50vh] min-h-[400px] w-full">
-          <Image
-      src={`${imgPath}?v=${Date.now()}`}
-      alt="Banner image"
-      fill
-      style={{ objectFit: "cover" }}
-      priority
-    />
-<div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-  <div  className="text-center ">
-    <h1 style={{
-        color: getColor("homepage_title"),
-      }} className={`${getSize("homepage_title")} font-bold mb-4`}>{getText("homepage_title")}</h1>
-    <p style={{
-        color: getColor("podnadpis"),
-        fontSize: getSize("podnadpis"),
-      }} className={`${getSize("podnadpis")} mb-4`}>{getText("podnadpis")}</p>
-  </div>
-</div>
-    </div>
-    <div className="container mx-auto py-12 px-4 ">
-      <div className="mb-12">
-        <h2 className="text-3xl font-bold mb-6 text-center ">{getText("o_nas_titulek")}</h2>
-        <p className="max-w-2xl mx-auto text-center text-lg">
-          {getText("o_nas_text")}
-        </p>
-      </div>
-      <div className="border-t border-gray-200"></div>
-      <div>
-        <h2 className="text-3xl font-bold mb-6 text-center pt-10">Nejnovější příspěvky</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogs?.map((post) => (
-            <div key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-              <img
-                src={`${post.imageUrl}?height=200&width=400&text=Blog+${post.id}`}
-                alt={`Blog post ${post.id}`}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">Název blogu {post.title}</h3>
-                <a href={`/blog/${post.id}`} className="text-blue-600 hover:underline">
-                  Číst více
-                </a>
-              </div>
+<div>
+<NavBar />
+<div 
+      className="min-h-screen bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: "url('https://media.discordapp.net/attachments/857718530005925898/1286634538965143655/DALLE_2024-09-20_12.25.59_-_Create_a_realistic_image_for_the_background_of_a_website_offering_web_development_services._The_scene_should_depict_two_people_sitting_at_a_desk_work.webp?ex=684ff14a&is=684e9fca&hm=5c3463da88fc1f47fa4f281fb938fe467ad892cd78ae38e30a05d995ec97b3cf&=&format=webp&width=1956&height=1118')"
+      }}
+    >
+      <div className="bg-white bg-opacity-60 min-h-screen">
+        <div className="container mx-auto px-4 py-8">
+        <div className="max-w-3xl mx-auto mb-16 text-center">
+            <h1 className="text-4xl md:text-5xl text-blue-600 mb-8 font-semibold leading-tight">
+              Vytvořte si web jednoduše a rychle
+            </h1>
             </div>
-          ))}
+          
+        </div>
+        <div className="max-w-md  mx-auto">
+            <Card 
+              image="/placeholder.svg?height=200&width=300"
+              title="Základní balíček"
+              descriptions={[
+                "3 šablony",
+                "Responzivní design",
+                "Hosting",
+                "Vlastní doména",
+                "SEO optimalizace"
+              ]}
+              price="Zdarma"
+            />
+          </div>
+      </div>
+
+      <div className="relative">
+        <svg className="absolute bottom-0 w-full h-6 -mb-1 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+          <path fill="currentColor" fillOpacity="1" d="M0,64L80,85.3C160,107,320,149,480,154.7C640,160,800,128,960,112C1120,96,1280,96,1360,96L1440,96L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+        </svg>
+      </div>
+
+      <div className="bg-white py-6">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <AdvantageItem title="Rychlost" />
+              <AdvantageItem title="Jednoduchost" />
+              <AdvantageItem title="Podpora" />
+              <AdvantageItem title="Dostupnost" />
+            </div>
+          </div>
         </div>
       </div>
+      <div className="border-t border-gray-200"></div>
+      <div className="bg-white py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-semibold text-center text-gray-800 mb-12">Vyberte si z našich šablon</h2>
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <TemplateCard 
+              imageSrc="/a1-2.png?height=400&width=300"
+              title="Moderní"
+              description="minimalistický design pro moderní firmy"
+            />
+            <TemplateCard 
+              imageSrc="/rubin6.png?height=400&width=300"
+              title="Klasický"
+              description="Vzhled vhodný pro zavedené podniky"
+            />
+            <TemplateCard 
+              imageSrc="/sablony_apollo_hlavicka-paticka-temy-new.png?height=400&width=300"
+              title="Kreativní"
+              description="Unikátní design pro kreativní profesionály"
+            />
+          </div>
+        </div>
+      </div>
+      <div className="relative">
+        <svg className="absolute bottom-0 w-full h-6 -mb-1 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+          <path fill="currentColor" fillOpacity="1" d="M0,64L80,85.3C160,107,320,149,480,154.7C640,160,800,128,960,112C1120,96,1280,96,1360,96L1440,96L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+        </svg>
+      </div>
     </div>
-      <Footer />
-    </main>
-  )
+    <Footer />
+    </div>
+
+  );
 }
+
+export default Home;

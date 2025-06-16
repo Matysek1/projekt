@@ -43,11 +43,7 @@ CREATE TABLE `blog` (
 --
 
 INSERT INTO `blog` (`id`, `title`, `content`, `userId`, `createdAt`, `updatedAt`, `published`, `imageUrl`) VALUES
-('cmbv1yuuk00011zit6bp1pwfl', 'Můj nový článek 1', '', 'cmbji3q69000707l7g4xld6ww', '2025-06-13 16:59:33.147', '2025-06-13 16:59:33.147', 1, '/uploads/images/image-1749850485001.png'),
-('cmbv1zht500031zitkjoixpw4', 'Můj nový článek 2', '', 'cmbji3q69000707l7g4xld6ww', '2025-06-13 17:00:02.921', '2025-06-15 21:19:40.598', 1, '/uploads/images/image-1749850485001.png'),
-('cmbvbsvdd00071zituv6q6u1j', 'Můj nový článek', '<p>sadsad</p>', 'cmbji3q69000707l7g4xld6ww', '2025-06-13 21:34:50.060', '2025-06-13 21:34:50.060', 1, '/uploads/images/image-1749850485001.png'),
-('cmbvcsaol00091zityfmhp9gs', 'Článek o hovně', '<h1>Jak sadkasdasdasd sa</h1><h2>sadsadsadasdasdasdasdasdsa</h2><ul><li><p>sdasdsaaaaaaaaaa</p></li><li><p>saddddddddddddddddddddddd</p></li><li><p>asdasddddddddddddddddd</p></li></ul><p>sadd', 'cmbji3q69000707l7g4xld6ww', '2025-06-13 22:02:22.865', '2025-06-13 22:02:22.865', 1, '/uploads/images/image-1749852138919.png'),
-('cmbz0hiro000155rni4xk50s0', 'Můj nový článek', '', 'cmbji3q69000707l7g4xld6ww', '2025-06-16 11:29:09.440', '2025-06-16 11:29:11.611', 1, 'mrdka');
+
 
 -- --------------------------------------------------------
 
@@ -110,7 +106,7 @@ INSERT INTO `pagecontent` (`id`, `key`, `value`, `updatedAt`, `updatedBy`, `head
 (3, 'podnadpis', 'Popis stránky 2', '2025-06-13 16:38:27.059', 'system', 'Pod nadpis', '{\"color\":\"#ffffff\",\"fontSize\":\"text-xl\"}'),
 (4, 'o_nas_titulek', 'O nás titulek', '2025-06-18 23:10:35.000', '', 'O nás titulek', NULL),
 (6, 'o_nas_text', 'Zde můžete napsat krátké představení o sobě nebo vaší firmě. Tento text by měl být výstižný a zajímavý, aby zaujal návštěvníky vašeho webu a představil jim, čím se zabýváte.\n\n', '2025-06-11 23:10:38.000', '', 'O nás text\n', NULL),
-(7, 'nazev_stranky', 'Kuchařka', '2025-06-15 19:54:05.429', 'system', 'Název stránky', '{\"color\":\"#000000\",\"fontSize\":\"text-base\"}');
+(7, 'nazev_stranky', 'Moje stránka', '2025-06-15 19:54:05.429', 'system', 'Název stránky', '{\"color\":\"#000000\",\"fontSize\":\"text-base\"}');
 
 -- --------------------------------------------------------
 
@@ -164,10 +160,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `password`, `email`, `emailVerified`, `dic`, `firma`, `ico`, `mesto`, `phone`, `psc`, `state`, `ulice`) VALUES
-('cmbji3q69000707l7g4xld6ww', 'Jan Novák', '$2a$12$cA7WjSnLwuQeVPVLIXnvceg1XS8N5ceCriREQAVoQWNrW8x6T7NX2', 'zkouska@zkouska.cz', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('cmbv2aoy900041zith5ni1izb', 'Petr Mára', '$2b$10$Igy4ZUvHXwkucTnBDvgU0uM.ns85YueSKzjq1CK2tvYJCv91yJhja', 'petr@mara.cz', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('cmbv2b2r300051zitaa9lrahc', 'Alena Jablůňková', '$2b$10$6q.LfrE3TxPhZPWVGpV3HuZfpnSBtJHn7/zmHssZcbVdSra7bE4ZK', 'alena@jablunkova.cz', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('cmbzhl4j800008vwnsd7706i0', 'Jandsa Asad', '$2b$10$kHLDoA82tsaPVBObc5AGrOH34Chy7TMSNlU4Ug7kD3uvWZkpUbMGK', 'zajicek.matej7@seznam.cz', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
 
 -- --------------------------------------------------------
 

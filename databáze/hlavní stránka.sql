@@ -50,7 +50,7 @@ CREATE TABLE `pages` (
 --
 
 INSERT INTO `pages` (`id`, `status`, `userEmail`, `name`) VALUES
-(1, 0, 'zajicek.matej7@seznam.cz', 'web1');
+(1, 1, null, 'web1');
 
 -- --------------------------------------------------------
 
@@ -83,35 +83,7 @@ CREATE TABLE `stranka` (
 --
 
 INSERT INTO `stranka` (`id`, `userId`, `name`, `idtemplate`) VALUES
-(25, 'cmby2ghrm0001bkunior56rm1', 'Makam', 1),
-(26, 'cmby2ghrm0001bkunior56rm1', 'Makam', 1),
-(27, 'cmby2ghrm0001bkunior56rm1', 'Makam', 1),
-(28, 'cmby2ghrm0001bkunior56rm1', 'Makam', 1),
-(29, 'cmby2ghrm0001bkunior56rm1', 'Makam', 1),
-(30, 'cmby2ghrm0001bkunior56rm1', 'Makam', 1),
-(31, 'cmby2ghrm0001bkunior56rm1', 'Makam', 1),
-(32, 'cmby2ghrm0001bkunior56rm1', 'Makam', 1),
-(33, 'cmby2ghrm0001bkunior56rm1', 'Makam', 1),
-(34, 'cmby2ghrm0001bkunior56rm1', 'Firemní stránka', 1),
-(35, 'cmby2ghrm0001bkunior56rm1', 'Firemní stránka', 1),
-(36, 'cmby2ghrm0001bkunior56rm1', 'Firemní stránka', 1),
-(37, 'cmby2ghrm0001bkunior56rm1', 'Makam', 1),
-(38, 'cmby2ghrm0001bkunior56rm1', 'Makam', 1),
-(39, 'cmby2ghrm0001bkunior56rm1', 'Makam', 1),
-(40, 'cmby2ghrm0001bkunior56rm1', 'Firemní stránka', 1),
-(41, 'cmby2ghrm0001bkunior56rm1', 'Makam', 1),
-(42, 'cmby2ghrm0001bkunior56rm1', 'Firemní stránka', 1),
-(43, 'cmby2ghrm0001bkunior56rm1', 'Firemní stránka', 1),
-(44, 'cmby2ghrm0001bkunior56rm1', 'Makam', 1),
-(45, 'cmby2ghrm0001bkunior56rm1', 'Makam', 1),
-(46, 'cmby2ghrm0001bkunior56rm1', 'Firemní stránka', 1),
-(47, 'cmby2ghrm0001bkunior56rm1', 'Firemní stránka', 1),
-(48, 'cmby2ghrm0001bkunior56rm1', 'Firemní stránka', 1),
-(49, 'cmby2ghrm0001bkunior56rm1', 'Firemní stránka', 1),
-(50, 'cmby2ghrm0001bkunior56rm1', 'Firemní stránka', 1),
-(51, 'cmby2ghrm0001bkunior56rm1', 'Firemní stránka', 1),
-(52, 'cmby2ghrm0001bkunior56rm1', 'Firemní stránka', 1),
-(53, 'cmby2ghrm0001bkunior56rm1', 'Firemní stránka', 1);
+
 
 -- --------------------------------------------------------
 
@@ -140,7 +112,6 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `password`, `email`, `emailVerified`, `firma`, `phone`, `ico`, `dic`, `ulice`, `mesto`, `psc`, `state`) VALUES
-('cmby2ghrm0001bkunior56rm1', 'Jandsa Asad', '$2b$10$X/H5sQBkq.7WHhNLmZA3bugTmNd255lOEEMc.e4UsfdU3zVYFzR46', 'zajicek.matej7@seznam.cz', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -162,7 +133,6 @@ CREATE TABLE `verificationtoken` (
 --
 
 INSERT INTO `verificationtoken` (`id`, `type`, `userId`, `used`, `token`, `expires`) VALUES
-(7, 'emailverification', 'cmby2ghrm0001bkunior56rm1', 0, '1c8ce39f0e328862fa04e1cf46e45a78431d048b235877f65a0a661411df5ed0', '2025-06-15 20:36:36.060');
 
 --
 -- Indexy pro exportované tabulky
