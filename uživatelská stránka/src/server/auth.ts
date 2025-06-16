@@ -24,7 +24,6 @@ declare module "next-auth" {
     user: DefaultSession["user"] & {
       id: string;
       name: string;
-      
       // ...other properties
       // role: UserRole;
     };
@@ -37,7 +36,7 @@ declare module "next-auth" {
 }
 
 const AUTH_PAGES = {
-  signIn: "/auth/signin",
+  signIn: "/login",
   signOut: "/auth/signout",
   index: "/"
 }
@@ -79,23 +78,18 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      
       if (user) {
         token.id = user.id;
         token.email = user.email;
-        token.name = user.name;
 
       }
-      console.log("JWT Callback:", token); // Debug výstup pro JWT
-
       return token;
     },
     async session({ session, token }) {
-
+      if (token) {
         session.user.id = token.id as string;
         session.user.email = token.email;
-        console.log("Session Callback:", session); // Debug výstup pro Session
-        
+      }
       return session;
     },
   },
