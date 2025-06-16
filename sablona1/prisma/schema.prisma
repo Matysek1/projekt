@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
+    // Further reading:
+    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
+    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
+    url      = env("DATABASE_URL")
+}
+
+
+
+model Session {
+    id           String   @id @default(cuid())
+    sessionToken String   @unique
+    userId       String
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+
+model User {
+    id            String    @id @default(cuid())
+    name          String
+    password      String
+    email         String   @unique
+    sessions      Session[]
+    stranky       Stranka[]
+    pages         Page[]
+    blogs         Blog[]
+}
+
+model Stranka {
+    id            Int      @id @default(autoincrement())
+    userId        String
+    name          String
+    user          User     @relation(fields: [userId], references: [id])
+}
+
+model PageContent {
+  id            Int      @id @default(autoincrement())
+  key       String   @unique
+  headtext String
+  value     String?
+  settings  Json?
+  updatedAt DateTime @updatedAt
+  updatedBy String
+}
+
+model Page {
+  id        String   @id @default(cuid())
+  title     String
+  content   String 
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Blog {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean   @default(false)
+  imageUrl String?
+  
+}
+
+model Color {
+    id        Int      @id @default(autoincrement())
+    name      String
+    hex       String
+}
+
+model VerificationToken {
+    id        Int      @id @default(autoincrement())
+    type     String
+    userId    String    
+    used    Boolean
+    token      String   @unique
+    expires    DateTime
+}
