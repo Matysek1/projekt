@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+
 import { env } from "~/env";
 
 const createPrismaClient = () =>
@@ -8,9 +9,9 @@ const createPrismaClient = () =>
   });
 
 const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined; // 💥 TADY přidáš typ
+  prisma: ReturnType<typeof createPrismaClient> | undefined;
 };
 
-export const db: PrismaClient = globalForPrisma.prisma ?? createPrismaClient();
+export const db = globalForPrisma.prisma ?? createPrismaClient();
 
 if (env.NODE_ENV !== "production") globalForPrisma.prisma = db;

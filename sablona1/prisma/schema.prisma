@@ -30,7 +30,7 @@ model User {
     name          String
     password      String
     email         String   @unique
-    emailVerified   Boolean?
+    emailVerified Boolean?
     firma         String?
     phone         String?
     ico           Int?
@@ -41,54 +41,26 @@ model User {
     state        String?
     sessions      Session[]
     stranky       Stranka[]
-    pages         Page[]
-    blogs         Blog[]
+}
+
+model pages{
+    id Int      @id @default(autoincrement())
+    status          Boolean
+    userEmail       String?
+    name            String
+}
+
+model newsLetter {
+    id            Int      @id @default(autoincrement())
+    email         String   @unique
 }
 
 model Stranka {
     id            Int      @id @default(autoincrement())
     userId        String
     name          String
+    idtemplate    Int
     user          User     @relation(fields: [userId], references: [id])
-}
-
-model PageContent {
-  id            Int      @id @default(autoincrement())
-  key       String   @unique
-  headtext String
-  value     String?
-  settings  Json?
-  updatedAt DateTime @updatedAt
-  updatedBy String
-}
-
-model Page {
-  id        String   @id @default(cuid())
-  title     String
-  content   String 
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Blog {
-  id        String   @id @default(cuid())
-  title     String
-  content   String
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  published Boolean   @default(false)
-  imageUrl String?
-  
-}
-
-model Color {
-    id        Int      @id @default(autoincrement())
-    name      String
-    hex       String
 }
 
 model VerificationToken {

@@ -1,7 +1,8 @@
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import { userRouter } from "./routers/user";
-import { blogRouter } from "./routers/blog";
-import { pageContentRouter } from "./routers/pagecontent";
+import { strankarouter } from "./routers/stranka"
+import { powershellRouter } from "./routers/runPowerShell";
+import { userOnWebRouter } from "./routers/usrOnweb";
 
 
 
@@ -13,8 +14,9 @@ import { pageContentRouter } from "./routers/pagecontent";
 
 export const appRouter = createTRPCRouter({
   user: userRouter,
-  blog: blogRouter,
-  texts: pageContentRouter,
+  stranka:strankarouter,
+  runPowerShell: powershellRouter,
+  userOnWeb: userOnWebRouter,
 });
 
 // export type definition of API
